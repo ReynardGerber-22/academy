@@ -1,5 +1,15 @@
+import { Hero } from "../components/Hero/Hero"
+import {Footer } from "../components/Footer/Footer"
+
 export const Home = () => {
     return (
-        <div>Home</div>
+        <>
+            <Hero></Hero>
+            <div className="p-4">
+
+            </div>
+            <Footer />
+        </>
+
     )
 }

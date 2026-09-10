@@ -7,9 +7,9 @@ import { Login } from "./pages/Login";
 function App() {
   return (
     <Routes>
+      <Route path="/login" element= {<Login />} />
       <Route element={<MainLayout />}>
         <Route path="/" element= {<Home />} />
-        <Route path="/login" element= {<Login />} />
       </Route>
       <Route path="*" element={<Navigate to="/"/>} />
     </Routes>
