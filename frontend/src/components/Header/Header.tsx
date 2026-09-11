@@ -1,9 +1,11 @@
 type HeaderProps = {
   onSupportClick: () => void;
   supportOpen: boolean;
+  onLoginClick: () => void;
+  loginOpen: boolean;
 };
 
-export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
+export const Header = ({ onSupportClick, supportOpen, onLoginClick, loginOpen }: HeaderProps) => {
   return (
       <header
         className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur"
@@ -85,7 +87,14 @@ export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
               </svg>
               Support
             </button>
-            <button className="items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs hidden sm:inline-flex">
+            <button
+              className="items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs hidden sm:inline-flex"
+              type="button"
+              onClick={onLoginClick}
+              aria-haspopup="dialog"
+              aria-expanded={loginOpen}
+              data-state={loginOpen ? "open" : "closed"}
+            >       
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
