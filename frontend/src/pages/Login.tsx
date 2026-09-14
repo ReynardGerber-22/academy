@@ -22,41 +22,6 @@ export const Login = () => {
           </div>
         </div>
         <div className="space-y-4 p-6 pt-0">
-          <button
-            className="inline-flex h-9 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 h-4 w-4"
-              aria-hidden="true"
-            >
-              <path d="M10.88 21.94 15.46 14" />
-              <path d="M21.17 8H12" />
-              <path d="M3.95 6.06 8.54 14" />
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="12" r="4" />
-            </svg>
-            Continue with Google
-          </button>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">
-                Or continue with email
-              </span>
-            </div>
-          </div>
           <form className="space-y-4">
             <div className="space-y-2">
               <label
@@ -117,7 +82,10 @@ export const Login = () => {
           </form>
           <p className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <a href="/" className="text-brand hover:underline">
+            <a
+              href="https://www.tolley.co.uk/"
+              className="text-brand hover:underline"
+            >
               Enrol to get started
             </a>
           </p>
