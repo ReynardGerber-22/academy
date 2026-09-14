@@ -13,14 +13,14 @@ export const Support = ({ open, onClose }: SupportProps) => {
       aria-hidden={!open}
       aria-labelledby="radix-_R_taqH1_"
       inert={!open}
-      className={`fixed inset-y-0 right-0 z-50 box-border h-screen w-full max-w-none overflow-y-auto border-l bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out sm:max-w-sm ${
+      className={`fixed inset-y-0 right-0 z-50 h-screen w-full overflow-y-auto border-l bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out sm:max-w-sm ${
         open ? "translate-x-0" : "pointer-events-none translate-x-full"
       }`}
     >
       <button
         type="button"
         onClick={onClose}
-        className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
+        className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
       >
         <X className="h-4 w-4" aria-hidden="true" />
         <span className="sr-only">Close</span>
@@ -47,7 +47,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
       >
         <a
           href="mailto:hello@fiscusacademy.example"
-          className="flex items-start gap-4 rounded-md border border-border p-4 transition-colors hover:bg-accent"
+          className="flex items-start gap-4 rounded-md border p-4 transition-colors hover:bg-accent"
         >
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
@@ -69,7 +69,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
         </a>
         <a
           href="tel:+27123456789"
-          className="flex items-start gap-4 rounded-md border border-border p-4 transition-colors hover:bg-accent"
+          className="flex items-start gap-4 rounded-md border p-4 transition-colors hover:bg-accent"
         >
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
@@ -90,7 +90,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
           </div>
         </a>
         <div
-          className="flex items-start gap-4 rounded-md border border-border p-4"
+          className="flex items-start gap-4 rounded-md border p-4"
         >
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
@@ -112,7 +112,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
         </div>
         <a
           href="mailto:technicalqueries@lexisnexis.co.uk"
-          className="flex items-start gap-4 rounded-md border border-border p-4 transition-colors hover:bg-accent"
+          className="flex items-start gap-4 rounded-md border p-4 transition-colors hover:bg-accent"
         >
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
@@ -132,7 +132,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
             </p>
           </div>
         </a>
-        <hr className="my-8 border-border" />
+        <hr className="my-8" />
         <section className="space-y-3">
           <h2 className="text-lg font-semibold text-foreground">
             Not enrolled?

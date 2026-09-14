@@ -9,11 +9,11 @@ export const Login = () => {
       aria-labelledby="login-title"
       className="flex min-h-[calc(100dvh-4rem)] items-center justify-center bg-sand px-5 py-12"
     >
-      <div className="w-full max-w-sm rounded-xl border bg-card text-card-foreground shadow shadow-card">
+      <div className="w-full max-w-sm rounded-xl border bg-card text-card-foreground shadow-card">
         <div className="flex flex-col space-y-1 p-6">
           <h1
             id="login-title"
-            className="font-display text-2xl font-semibold tracking-tight"
+            className="text-2xl font-semibold tracking-tight"
           >
             Welcome back
           </h1>
@@ -49,7 +49,7 @@ export const Login = () => {
           </button>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-border" />
+              <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-card px-2 text-muted-foreground">
@@ -109,7 +109,7 @@ export const Login = () => {
               </div>
             </div>
             <button
-              className="inline-flex h-9 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              className="inline-flex h-9 w-full items-center justify-center whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               type="submit"
             >
               Sign in

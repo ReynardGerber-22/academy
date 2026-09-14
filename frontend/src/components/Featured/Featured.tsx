@@ -5,8 +5,8 @@ export const Featured = () => {
         How the teaching works
       </h2>
       <div className="mt-10 grid gap-6 md:grid-cols-3">
-        <div className="rounded-xl border bg-card text-card-foreground shadow border-border shadow-card">
-          <div className="flex flex-col space-y-1.5 p-6">
+        <div className="rounded-xl border bg-card text-card-foreground shadow-card">
+          <div className="p-6">
             <div className="font-semibold tracking-tight font-display text-xl">
               Statute-first teaching
             </div>
@@ -16,8 +16,8 @@ export const Featured = () => {
             commentary and practice notes.
           </div>
         </div>
-        <div className="rounded-xl border bg-card text-card-foreground shadow border-border shadow-card">
-          <div className="flex flex-col space-y-1.5 p-6">
+        <div className="rounded-xl border bg-card text-card-foreground shadow-card">
+          <div className="p-6">
             <div className="font-semibold tracking-tight font-display text-xl">
               Case law you can cite
             </div>
@@ -27,8 +27,8 @@ export const Featured = () => {
             what to quote in an exam answer.
           </div>
         </div>
-        <div className="rounded-xl border bg-card text-card-foreground shadow border-border shadow-card">
-          <div className="flex flex-col space-y-1.5 p-6">
+        <div className="rounded-xl border bg-card text-card-foreground shadow-card">
+          <div className="p-6">
             <div className="font-semibold tracking-tight font-display text-xl">
               Exam-shaped practice
             </div>
