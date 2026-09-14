@@ -14,23 +14,23 @@ export const Hero = () => {
             <span className="text-brand">actually practised</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-            Tolley Academy allows students to access all study materials online,
-            on a PC, laptop, tablet or mobile, 24 hours a day. Students can
-            study whenever and wherever it suits them, making the best use of
-            their time and to have the best chance of exam success. Use this
-            service to keep tabs on your learning, check exam dates and
-            locations, take online tests and more.
+            Academy allows students to access all study materials online, on a
+            PC, laptop, tablet or mobile, 24 hours a day. Students can study
+            whenever and wherever it suits them, making the best use of their
+            time and to have the best chance of exam success. Use this service
+            to keep tabs on your learning, check exam dates and locations, take
+            online tests and more.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="https://www.tolley.co.uk/exam-training"
+              href="/"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-md px-8 shadow-brand"
             >
               Enrol
               <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
             </a>
             <a
-              href="https://www.tolley.co.uk/exam-training"
+              href="/"
               className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 rounded-md px-8"
             >
               Read More

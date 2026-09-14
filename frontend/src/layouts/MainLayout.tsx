@@ -19,6 +19,14 @@ export const MainLayout = () => {
       >
         <Outlet />
       </main>
+      {supportOpen && (
+        <button
+          type="button"
+          aria-label="Close student support"
+          className="fixed inset-0 z-40 cursor-default"
+          onClick={() => setSupportOpen(false)}
+        />
+      )}
       <Support open={supportOpen} onClose={() => setSupportOpen(false)} />
     </div>
   );

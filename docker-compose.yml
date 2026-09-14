@@ -1,4 +1,4 @@
-name: tolley-academy-dev
+name: academy-dev
 
 services:
   php:
@@ -29,12 +29,12 @@ services:
   db:
     image: mysql:8.4
     environment:
-      MYSQL_DATABASE: tolley-academy
-      MYSQL_USER: tolley
+      MYSQL_DATABASE: academy
+      MYSQL_USER: academy
       MYSQL_PASSWORD: Testing99!
       MYSQL_ROOT_PASSWORD: Testing99!
     volumes:
-      - mysql_data_tolley:/var/lib/mysql
+      - mysql_data_academy:/var/lib/mysql
 
 volumes:
-  mysql_data_tolley:
+  mysql_data_academy:

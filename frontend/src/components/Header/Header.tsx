@@ -18,7 +18,7 @@ export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
             />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">
-            Tolley<span className="text-brand"> Academy</span>
+            Academy
           </span>
         </Link>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
@@ -64,7 +64,7 @@ export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
             Log in
           </Link>
           <a
-            href="https://www.tolley.co.uk/"
+            href="/"
             className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs"
           >
             Enrol

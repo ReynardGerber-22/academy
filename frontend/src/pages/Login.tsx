@@ -82,10 +82,7 @@ export const Login = () => {
           </form>
           <p className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <a
-              href="https://www.tolley.co.uk/"
-              className="text-brand hover:underline"
-            >
+            <a href="/" className="text-brand hover:underline">
               Enrol to get started
             </a>
           </p>

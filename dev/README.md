@@ -7,8 +7,8 @@ JSON. `/api/user` requires authentication.
 
 ## Resource isolation
 
-Development uses the Compose project `tolley-academy-dev`; production uses
-`tolley-academy-prod`. Each gets its own database volume and network. Production
+Development uses the Compose project `academy-dev`; production uses
+`academy-prod`. Each gets its own database volume and network. Production
 also gets a persistent Laravel storage volume for uploads and file sessions.
 Do not override these names with a shared `-p` or `COMPOSE_PROJECT_NAME` value.
 Use a different project name for each additional deployment.
@@ -105,6 +105,6 @@ If Docker reports a missing Buildx plugin, install/repair that plugin. For the
 current development image, the legacy-builder fallback used during setup is:
 
 ```sh
-DOCKER_BUILDKIT=0 docker build -t tolley-academy-dev-php -f dev/php/Dockerfile .
+DOCKER_BUILDKIT=0 docker build -t academy-dev-php -f dev/php/Dockerfile .
 docker compose up -d --no-build
 ```
