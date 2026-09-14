@@ -1,19 +1,48 @@
-import {Routes, Route, Navigate} from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { MainLayout } from "./layouts/MainLayout";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
-
+import { AuthProvider } from "./auth/AuthProvider";
+import { RequireAuth } from "./auth/RequireAuth";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element= {<Login />} />
-      <Route element={<MainLayout />}>
-        <Route path="/" element= {<Home />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/"/>} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route element={<RequireAuth />}>
+            <Route
+              path="/my-learning/*"
+              element={
+                <h1 className="mx-auto max-w-6xl px-5 py-12 text-2xl">
+                  My Learning
+                </h1>
+              }
+            />
+            <Route
+              path="/my-progress/*"
+              element={
+                <h1 className="mx-auto max-w-6xl px-5 py-12 text-2xl">
+                  My Progress
+                </h1>
+              }
+            />
+            <Route
+              path="/forums/*"
+              element={
+                <h1 className="mx-auto max-w-6xl px-5 py-12 text-2xl">
+                  Student Forums
+                </h1>
+              }
+            />
+          </Route>
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 
-export default App
+export default App;

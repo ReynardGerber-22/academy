@@ -1,3 +1,5 @@
+import { X, Mail, Phone, Clock, MessageCircle } from "lucide-react";
+
 type SupportProps = {
   open: boolean;
   onClose: () => void;
@@ -20,22 +22,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
         onClick={onClose}
         className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-x h-4 w-4"
-          aria-hidden="true"
-        >
-          <path d="M18 6 6 18"></path>
-          <path d="m6 6 12 12"></path>
-        </svg>
+        <X className="h-4 w-4" aria-hidden="true" />
         <span className="sr-only">Close</span>
       </button>
       <div
@@ -65,22 +52,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-mail h-4.5 w-4.5"
-              aria-hidden="true"
-            >
-              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
-              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-            </svg>
+            <Mail className="h-4.5 w-4.5" aria-hidden="true" />
           </span>
           <div>
             <p
@@ -102,21 +74,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-phone h-4.5 w-4.5"
-              aria-hidden="true"
-            >
-              <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
-            </svg>
+            <Phone className="h-4.5 w-4.5" aria-hidden="true" />
           </span>
           <div>
             <p
@@ -137,22 +95,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-clock h-4.5 w-4.5"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M12 6v6l4 2"></path>
-            </svg>
+            <Clock className="h-4.5 w-4.5" aria-hidden="true" />
           </span>
           <div>
             <p
@@ -174,21 +117,7 @@ export const Support = ({ open, onClose }: SupportProps) => {
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-secondary text-brand"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-message-circle h-4.5 w-4.5"
-              aria-hidden="true"
-            >
-              <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path>
-            </svg>
+            <MessageCircle className="h-4.5 w-4.5" aria-hidden="true" />
           </span>
           <div>
             <p
