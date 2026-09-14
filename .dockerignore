@@ -1,0 +1,11 @@
+node_modules
+vendor
+.git
+.env
+.env.*
+!.env.example
+dist
+*.log
+frontend/node_modules
+frontend/dist
+certbot
