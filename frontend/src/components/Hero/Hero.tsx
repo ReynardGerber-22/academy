@@ -14,12 +14,9 @@ export const Hero = () => {
             <span className="text-brand">actually practised</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-            Academy allows students to access all study materials online, on a
-            PC, laptop, tablet or mobile, 24 hours a day. Students can study
-            whenever and wherever it suits them, making the best use of their
-            time and to have the best chance of exam success. Use this service
-            to keep tabs on your learning, check exam dates and locations, take
-            online tests and more.
+            Structured courses in income tax, VAT, corporate and international
+            tax — grounded in the statute, illustrated by case law, and drilled
+            with exam-style problems.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
