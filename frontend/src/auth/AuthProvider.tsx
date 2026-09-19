@@ -1,9 +1,24 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext, type AuthUser } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Populate this only after the authentication service verifies a session.
   const [user, setUser] = useState<AuthUser | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch("api/user", {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const user = await response.json();
+        setUser(user);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   const login = async (email: string, password: string): Promise<void> => {
     await fetch("/sanctum/csrf-cookie", {
       credentials: "include",
