@@ -8,7 +8,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
-  const { logout } = useAuth();
+  const { logout, user, loading } = useAuth();
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
@@ -59,22 +59,27 @@ export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
             <Headset className="mr-1.5 h-4 w-4" aria-hidden="true" />
             Support
           </button>
-          <Link
-            to="/login"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs"
-          >
-            <LogIn className="mr-1.5 h-4 w-4" aria-hidden="true" />
-            Log in
-          </Link>
-          <button
-            onClick={logout}
-            className="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs"
-          >
-            <LogOut className="mr-1.5 h-4 w-4" aria-hidden="true" />
-            Log out
-          </button>
+          {!user && !loading && (
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs"
+            >
+              <LogIn className="mr-1.5 h-4 w-4" aria-hidden="true" />
+              Log in
+            </Link>
+          )}
+          {user && !loading && (
+            <button
+              type="button"
+              onClick={logout}
+              className="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs"
+            >
+              <LogOut className="mr-1.5 h-4 w-4" aria-hidden="true" />
+              Log out
+            </button>
+          )}
           <a
-            href="/"
+            href="/register"
             className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs"
           >
             Enrol

@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { AuthContext, type AuthUser } from "./AuthContext";
+import { AuthContext, ValidationError, type AuthUser } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Populate this only after the authentication service verifies a session.
@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("api/user", {
+        const response = await fetch("/api/user", {
           credentials: "include",
         });
         if (response.ok) {
@@ -62,8 +62,45 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
   };
 
+  const register = async (
+    name: string,
+    email: string,
+    password: string,
+    password_confirmation: string,
+  ): Promise<void> => {
+    await fetch("/sanctum/csrf-cookie", {
+      credentials: "include",
+    });
+    const response = await fetch("/api/register", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        password_confirmation,
+      }),
+    });
+    if (!response.ok) {
+      const data = await response.json();
+      console.log(data);
+      throw new ValidationError(
+        data.message || "Registration failed",
+        data.errors || {},
+      );
+    }
+    const data = await response.json();
+    setUser(data.user);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser, login, loading, logout }}>
+    <AuthContext.Provider
+      value={{ user, setUser, login, loading, logout, register }}
+    >
       {children}
     </AuthContext.Provider>
   );
