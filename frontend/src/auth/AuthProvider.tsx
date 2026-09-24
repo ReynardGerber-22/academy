@@ -4,18 +4,24 @@ import { AuthContext, type AuthUser } from "./AuthContext";
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Populate this only after the authentication service verifies a session.
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch("api/user", {
-        credentials: "include",
-      });
-      if (response.ok) {
-        const user = await response.json();
-        setUser(user);
+      try {
+        const response = await fetch("api/user", {
+          credentials: "include",
+        });
+        if (response.ok) {
+          const user = await response.json();
+          setUser(user);
+        }
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchUser();
   }, []);
 
@@ -42,7 +48,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(data.user);
   };
   return (
-    <AuthContext.Provider value={{ user, setUser, login }}>
+    <AuthContext.Provider value={{ user, setUser, login, loading }}>
       {children}
     </AuthContext.Provider>
   );

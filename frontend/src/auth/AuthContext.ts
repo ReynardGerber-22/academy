@@ -8,6 +8,7 @@ export const AuthContext = createContext<{
   user: AuthUser | null;
   setUser: (user: AuthUser | null) => void;
   login: (email: string, password: string) => Promise<void>;
+  loading: boolean;
 } | null>(null);
 
 export const useAuth = () => {
