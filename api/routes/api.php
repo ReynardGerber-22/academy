@@ -7,6 +7,6 @@ use App\Http\Controllers\AuthController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/health', fn () => response()->json(['status' => 'ok']));

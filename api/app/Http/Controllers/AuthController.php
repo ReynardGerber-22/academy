@@ -23,4 +23,16 @@ class AuthController extends Controller
             'user' => $request->user(),
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        // Sanctum's auth middleware makes the "sanctum" RequestGuard the
+        // default guard, and it has no logout() method, so target "web" explicitly.
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return response()->json([
+            'message' => 'Logged out successfully.',
+        ]);
+    }
 }

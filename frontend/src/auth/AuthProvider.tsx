@@ -47,8 +47,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const data = await response.json();
     setUser(data.user);
   };
+
+  const logout = async (): Promise<void> => {
+    const response = await fetch("/api/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!response.ok) {
+      throw new Error("Logout failed");
+    }
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser, login, loading }}>
+    <AuthContext.Provider value={{ user, setUser, login, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
