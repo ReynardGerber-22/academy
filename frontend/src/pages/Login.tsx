@@ -108,8 +108,8 @@ export const Login = () => {
           </form>
           <p className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <a href="/" className="text-brand hover:underline">
-              Enrol to get started
+            <a href="/register" className="text-brand hover:underline">
+              Sign up to get started
             </a>
           </p>
         </div>

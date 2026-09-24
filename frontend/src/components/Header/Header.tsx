@@ -82,7 +82,7 @@ export const Header = ({ onSupportClick, supportOpen }: HeaderProps) => {
             href="/register"
             className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs"
           >
-            Enrol
+            Sign up
           </a>
         </div>
       </div>
