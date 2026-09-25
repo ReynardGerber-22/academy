@@ -9,6 +9,7 @@ import { AuthProvider } from "./auth/AuthProvider";
 import { RequireAuth } from "./auth/RequireAuth";
 import { RequireRole } from "./auth/RequireRole";
 import { AdminDashboard } from "./pages/AdminDashboard";
+import { AdminLayout } from "./layouts/AdminLayout";
 
 function App() {
   return (
@@ -22,9 +23,6 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
 
           <Route element={<RequireAuth />}>
-            <Route element={<RequireRole role="super-admin" />}>
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Route>
             <Route
               path="/my-learning/*"
               element={
@@ -49,6 +47,13 @@ function App() {
                 </h1>
               }
             />
+          </Route>
+        </Route>
+        <Route element={<RequireAuth />}>
+          <Route element={<RequireRole role="super-admin" />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
