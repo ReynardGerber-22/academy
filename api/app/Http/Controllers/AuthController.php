@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -36,7 +37,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
@@ -56,5 +58,47 @@ class AuthController extends Controller
         return response()->json([
             'user' => $user,
         ]);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        \Illuminate\Support\Facades\Password::sendResetLink(
+            $validated
+        );
+
+        return response()->json([
+            'message' => 'If an account exists for that email address, a password reset link has been sent.',
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validated = $request->validate([
+            'token' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $status = Password::reset(
+            $validated,
+            function ($user, $password) {
+                $user->password = $password;
+                $user->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json([
+                'message' => 'Password has been reset successfully.',
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Failed to reset password.',
+        ], 422);
     }
 }

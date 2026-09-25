@@ -1,7 +1,8 @@
-import { Eye } from "lucide-react";
+import { CheckCircle2, Eye } from "lucide-react";
 import { useState, useRef } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,6 +12,7 @@ export const Login = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,6 +46,18 @@ export const Login = () => {
             Sign in to continue your tax studies.
           </div>
         </div>
+        {location.state?.message && (
+          <div
+            className="mx-6 mb-5 flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-sm text-muted-foreground shadow-sm"
+            role="status"
+          >
+            <CheckCircle2
+              className="h-4 w-4 shrink-0 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <p>{location.state.message}</p>
+          </div>
+        )}
         <div className="space-y-4 p-6 pt-0">
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="space-y-2">
@@ -75,7 +89,7 @@ export const Login = () => {
                   type="button"
                   className="text-xs text-brand hover:underline"
                 >
-                  Forgot password?
+                  <a href="/forgot-password">Forgot password?</a>
                 </button>
               </div>
               <div className="relative">

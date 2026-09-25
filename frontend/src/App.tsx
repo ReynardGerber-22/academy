@@ -1,8 +1,10 @@
 import { Routes, Route, Navigate } from "react-router";
+import { ResetPassword } from "./pages/ResetPassword";
 import { MainLayout } from "./layouts/MainLayout";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Registration } from "./pages/Registration";
+import { ForgotPassword } from "./pages/ForgotPassword";
 import { AuthProvider } from "./auth/AuthProvider";
 import { RequireAuth } from "./auth/RequireAuth";
 
@@ -14,6 +16,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+
           <Route element={<RequireAuth />}>
             <Route
               path="/my-learning/*"
