@@ -1,6 +1,15 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext, ValidationError, type AuthUser } from "./AuthContext";
 
+const csrfHeaders = (): HeadersInit => {
+  const token = document.cookie
+    .split("; ")
+    .find((cookie) => cookie.startsWith("XSRF-TOKEN="))
+    ?.split("=")[1];
+
+  return token ? { "X-XSRF-TOKEN": decodeURIComponent(token) } : {};
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Populate this only after the authentication service verifies a session.
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -34,6 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        ...csrfHeaders(),
         Accept: "application/json",
       },
       body: JSON.stringify({
@@ -53,6 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...csrfHeaders(),
       },
       credentials: "include",
     });
@@ -76,6 +87,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        ...csrfHeaders(),
         Accept: "application/json",
       },
       body: JSON.stringify({

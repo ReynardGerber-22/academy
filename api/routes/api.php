@@ -13,3 +13,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::get('/health', fn () => response()->json(['status' => 'ok']));
+Route::get('/admin/test', fn () => response()->json([
+    'message' => 'Super-admin access confirmed.',
+]))->middleware(['web', 'auth:sanctum', 'role:super-admin']);
