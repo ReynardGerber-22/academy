@@ -5,7 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+
+    return $user->setRelation(
+        'roles',
+        $user->roles()->pluck('name')->values(),
+    );
 })->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/login', [AuthController::class, 'login']);

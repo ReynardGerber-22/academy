@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 
 export type AuthUser = {
   id: string;
+  roles: string[];
 };
 
 export type ValidationErrors = {

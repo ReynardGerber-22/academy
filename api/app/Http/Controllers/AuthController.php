@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -21,7 +22,7 @@ class AuthController extends Controller
         }
         $request->session()->regenerate();
         return response()->json([
-            'user' => $request->user(),
+            'user' => $this->userWithRoles($request->user()),
         ]);
     }
 
@@ -56,8 +57,16 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return response()->json([
-            'user' => $user,
+            'user' => $this->userWithRoles($user),
         ]);
+    }
+
+    private function userWithRoles(User $user): User
+    {
+        return $user->setRelation(
+            'roles',
+            $user->roles()->pluck('name')->values(),
+        );
     }
 
     public function forgotPassword(Request $request)
