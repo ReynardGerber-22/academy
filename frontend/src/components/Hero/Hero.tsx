@@ -20,17 +20,11 @@ export const Hero = () => {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/"
+              href="/register"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-md px-8 shadow-brand"
             >
               Enrol
               <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
-            </a>
-            <a
-              href="/"
-              className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 rounded-md px-8"
-            >
-              Read More
             </a>
           </div>
           <dl className="mt-10 grid max-w-lg grid-cols-3 gap-6 border-t pt-6">

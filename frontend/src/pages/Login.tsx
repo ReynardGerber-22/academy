@@ -1,5 +1,5 @@
 import { CheckCircle2, Eye } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
@@ -13,6 +13,9 @@ export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [statusMessage, setStatusMessage] = useState<string | null>(
+    () => location.state?.message ?? null,
+  );
 
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,6 +31,13 @@ export const Login = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (location.state?.message) {
+      setStatusMessage(location.state.message);
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location, navigate]);
 
   return (
     <section
@@ -46,7 +56,7 @@ export const Login = () => {
             Sign in to continue your tax studies.
           </div>
         </div>
-        {location.state?.message && (
+        {statusMessage && (
           <div
             className="mx-6 mb-5 flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-sm text-muted-foreground shadow-sm"
             role="status"
@@ -55,7 +65,7 @@ export const Login = () => {
               className="h-4 w-4 shrink-0 text-muted-foreground"
               aria-hidden="true"
             />
-            <p>{location.state.message}</p>
+            <p>{statusMessage}</p>
           </div>
         )}
         <div className="space-y-4 p-6 pt-0">
