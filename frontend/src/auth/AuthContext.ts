@@ -10,6 +10,7 @@ export type ValidationErrors = {
   email?: string[];
   password?: string[];
   password_confirmation?: string[];
+  roles?: string[];
 };
 
 export class ValidationError extends Error {

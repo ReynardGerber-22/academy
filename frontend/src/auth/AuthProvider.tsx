@@ -1,14 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext, ValidationError, type AuthUser } from "./AuthContext";
-
-const csrfHeaders = (): HeadersInit => {
-  const token = document.cookie
-    .split("; ")
-    .find((cookie) => cookie.startsWith("XSRF-TOKEN="))
-    ?.split("=")[1];
-
-  return token ? { "X-XSRF-TOKEN": decodeURIComponent(token) } : {};
-};
+import { csrfHeaders } from "./csrfHeaders";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Populate this only after the authentication service verifies a session.

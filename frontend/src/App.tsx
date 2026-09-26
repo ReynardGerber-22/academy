@@ -10,6 +10,8 @@ import { RequireAuth } from "./auth/RequireAuth";
 import { RequireRole } from "./auth/RequireRole";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminLayout } from "./layouts/AdminLayout";
+import { AdminUsers } from "./pages/AdminUsers";
+import { AdminUserDetail } from "./pages/AdminUserDetail";
 
 function App() {
   return (
@@ -53,6 +55,8 @@ function App() {
           <Route element={<RequireRole role="super-admin" />}>
             <Route element={<AdminLayout />}>
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/users/:id" element={<AdminUserDetail />} />
+              <Route path="/admin/users" element={<AdminUsers />} />
             </Route>
           </Route>
         </Route>
