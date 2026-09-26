@@ -66,7 +66,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const register = async (
-    name: string,
+    first_name: string,
+    surname: string,
     email: string,
     password: string,
     password_confirmation: string,
@@ -83,7 +84,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        name,
+        first_name,
+        surname,
         email,
         password,
         password_confirmation,

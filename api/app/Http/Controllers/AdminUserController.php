@@ -15,7 +15,7 @@ class AdminUserController extends Controller
     {
         $users = User::query()
             ->with('roles:id,name')
-            ->get(['id', 'name', 'email', 'created_at'])
+            ->get(['id', 'first_name', 'surname', 'email', 'created_at'])
             ->map(fn (User $user): array => $this->adminUserData($user));
 
         return response()->json($users);
@@ -40,7 +40,8 @@ class AdminUserController extends Controller
     public function update(Request $request, User $user): JsonResponse
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'email',
@@ -83,7 +84,8 @@ class AdminUserController extends Controller
     {
         return [
             'id' => $user->id,
-            'name' => $user->name,
+            'first_name' => $user->first_name,
+            'surname' => $user->surname,
             'email' => $user->email,
             'roles' => $user->roles->pluck('name')->values(),
             'created_at' => $user->created_at,

@@ -37,7 +37,8 @@ class SuperAdminSeeder extends Seeder
         ]);
 
         if (! $user->exists) {
-            $user->name = 'Admin';
+            $user->first_name = 'Admin';
+            $user->surname = 'User';
             $user->password = 'Testing99!';
             $user->save();
         }

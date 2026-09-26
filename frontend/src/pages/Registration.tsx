@@ -10,7 +10,8 @@ import { Eye } from "lucide-react";
 export const Registration = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const name = useRef<HTMLInputElement>(null);
+  const firstName = useRef<HTMLInputElement>(null);
+  const surname = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const passwordConfirmation = useRef<HTMLInputElement>(null);
@@ -22,7 +23,8 @@ export const Registration = () => {
     e.preventDefault();
     setErrors({});
     if (
-      name.current &&
+      firstName.current &&
+      surname.current &&
       email.current &&
       password.current &&
       passwordConfirmation.current
@@ -35,7 +37,8 @@ export const Registration = () => {
       }
       try {
         await register(
-          name.current.value,
+          firstName.current.value,
+          surname.current.value,
           email.current.value,
           password.current.value,
           passwordConfirmation.current.value,
@@ -75,17 +78,34 @@ export const Registration = () => {
         <div className="space-y-4 p-6 pt-0">
           <form onSubmit={onSubmit}>
             <div className="mb-4">
-              <label className="block mb-1">Name</label>
+              <label className="block mb-1">First name</label>
               <input
-                placeholder="Enter your name"
+                placeholder="Enter your first name"
                 type="text"
-                ref={name}
+                ref={firstName}
                 required
-                autoComplete="name"
+                autoComplete="given-name"
                 className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
               />
-              {errors.name &&
-                errors.name.map((error, index) => (
+              {errors.first_name &&
+                errors.first_name.map((error, index) => (
+                  <p className="text-red-500" key={index}>
+                    {error}
+                  </p>
+                ))}
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1">Surname</label>
+              <input
+                placeholder="Enter your surname"
+                type="text"
+                ref={surname}
+                required
+                autoComplete="family-name"
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+              />
+              {errors.surname &&
+                errors.surname.map((error, index) => (
                   <p className="text-red-500" key={index}>
                     {error}
                   </p>

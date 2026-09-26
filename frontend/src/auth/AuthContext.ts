@@ -6,7 +6,8 @@ export type AuthUser = {
 };
 
 export type ValidationErrors = {
-  name?: string[];
+  first_name?: string[];
+  surname?: string[];
   email?: string[];
   password?: string[];
   password_confirmation?: string[];
@@ -29,7 +30,8 @@ export const AuthContext = createContext<{
   loading: boolean;
   logout: () => Promise<void>;
   register: (
-    name: string,
+    first_name: string,
+    surname: string,
     email: string,
     password: string,
     password_confirmation: string,

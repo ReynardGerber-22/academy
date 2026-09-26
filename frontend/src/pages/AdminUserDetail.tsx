@@ -14,7 +14,8 @@ export const AdminUserDetail = () => {
   const [selectedRoleIds, setSelectedRoleIds] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [fieldErrors, setFieldErrors] = useState<ValidationErrors>({});
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -57,7 +58,8 @@ export const AdminUserDetail = () => {
         const [fetchedUser, fetchedRoles]: [AdminUser, AdminRole[]] =
           await Promise.all([userResponse.json(), rolesResponse.json()]);
         setUser(fetchedUser);
-        setName(fetchedUser.name);
+        setFirstName(fetchedUser.first_name);
+        setSurname(fetchedUser.surname);
         setEmail(fetchedUser.email);
         setAvailableRoles(fetchedRoles);
         setSelectedRoleIds(
@@ -93,7 +95,7 @@ export const AdminUserDetail = () => {
           Accept: "application/json",
           ...csrfHeaders(),
         },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ first_name: firstName, surname, email }),
       });
 
       if (response.status === 422) {
@@ -113,7 +115,8 @@ export const AdminUserDetail = () => {
 
       const updatedUser: AdminUser = await response.json();
       setUser(updatedUser);
-      setName(updatedUser.name);
+      setFirstName(updatedUser.first_name);
+      setSurname(updatedUser.surname);
       setEmail(updatedUser.email);
       setSuccessMessage("User details saved.");
     } catch {
@@ -199,16 +202,32 @@ export const AdminUserDetail = () => {
             onSubmit={handleSubmit}
           >
             <div className="space-y-2">
-              <label className="text-sm font-medium" htmlFor="user-name">
-                Name
+              <label className="text-sm font-medium" htmlFor="user-first-name">
+                First name
               </label>
               <input
-                id="user-name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
+                id="user-first-name"
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
                 className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />
-              {fieldErrors.name?.map((message) => (
+              {fieldErrors.first_name?.map((message) => (
+                <p className="text-sm text-brand" key={message}>
+                  {message}
+                </p>
+              ))}
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium" htmlFor="user-surname">
+                Surname
+              </label>
+              <input
+                id="user-surname"
+                value={surname}
+                onChange={(event) => setSurname(event.target.value)}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              />
+              {fieldErrors.surname?.map((message) => (
                 <p className="text-sm text-brand" key={message}>
                   {message}
                 </p>

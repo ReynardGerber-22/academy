@@ -67,7 +67,9 @@ export const AdminUsers = () => {
                     }
                   }}
                 >
-                  <td className="px-4 py-3 font-medium">{user.name}</td>
+                  <td className="px-4 py-3 font-medium">
+                    {user.first_name} {user.surname}
+                  </td>
                   <td className="px-4 py-3 text-muted-foreground">
                     {user.email}
                   </td>

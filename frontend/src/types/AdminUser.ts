@@ -1,6 +1,7 @@
 export type AdminUser = {
   id: number;
-  name: string;
+  first_name: string;
+  surname: string;
   email: string;
   roles: string[];
   created_at: string;

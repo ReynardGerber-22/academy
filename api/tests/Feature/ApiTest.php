@@ -118,18 +118,21 @@ class ApiTest extends TestCase
         Sanctum::actingAs($admin);
 
         $this->patchJson("/api/admin/users/{$user->id}", [
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => 'updated@example.com',
         ])
             ->assertOk()
             ->assertJsonPath('id', $user->id)
-            ->assertJsonPath('name', 'Updated User')
+            ->assertJsonPath('first_name', 'Updated')
+            ->assertJsonPath('surname', 'User')
             ->assertJsonPath('email', 'updated@example.com')
             ->assertJsonMissingPath('password');
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => 'updated@example.com',
         ]);
     }
@@ -142,7 +145,8 @@ class ApiTest extends TestCase
         Sanctum::actingAs($student);
 
         $this->patchJson("/api/admin/users/{$user->id}", [
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => 'updated@example.com',
         ])->assertForbidden();
     }
@@ -152,7 +156,8 @@ class ApiTest extends TestCase
         $user = User::factory()->create();
 
         $this->patchJson("/api/admin/users/{$user->id}", [
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => 'updated@example.com',
         ])->assertUnauthorized();
     }
@@ -164,7 +169,8 @@ class ApiTest extends TestCase
         Sanctum::actingAs($admin);
 
         $this->patchJson('/api/admin/users/999999', [
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => 'updated@example.com',
         ])->assertNotFound();
     }
@@ -178,7 +184,8 @@ class ApiTest extends TestCase
         Sanctum::actingAs($admin);
 
         $this->patchJson("/api/admin/users/{$user->id}", [
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => $existingUser->email,
         ])
             ->assertUnprocessable()
@@ -193,7 +200,8 @@ class ApiTest extends TestCase
         Sanctum::actingAs($admin);
 
         $this->patchJson("/api/admin/users/{$user->id}", [
-            'name' => 'Updated User',
+            'first_name' => 'Updated',
+            'surname' => 'User',
             'email' => $user->email,
         ])
             ->assertOk()
