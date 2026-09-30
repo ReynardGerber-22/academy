@@ -17,21 +17,6 @@ class SuperAdminSeeder extends Seeder
             'name' => 'super-admin',
         ]);
 
-        $legacyRole = Role::where('name', 'Admin')->first();
-        if ($legacyRole && $legacyRole->isNot($role)) {
-            $role->users()->syncWithoutDetaching($legacyRole->users()->pluck('users.id'));
-            $legacyRole->users()->detach();
-            $legacyRole->delete();
-        }
-
-        $studentRole = Role::whereRaw('LOWER(name) = ?', ['student'])->first();
-        if (! $studentRole) {
-            $studentRole = Role::create(['name' => 'student']);
-        } elseif ($studentRole->name !== 'student') {
-            $studentRole->name = 'student';
-            $studentRole->save();
-        }
-
         $user = User::firstOrNew([
             'email' => 'admin@academy.com',
         ]);
