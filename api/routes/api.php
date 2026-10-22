@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForumController;
 
 Route::get('/user', function (Request $request) {
     $user = $request->user();
@@ -18,10 +19,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
-Route::get('/health', fn () => response()->json(['status' => 'ok']));
-Route::get('/admin/test', fn () => response()->json([
-    'message' => 'Super-admin access confirmed.',
-]))->middleware(['web', 'auth:sanctum', 'role:super-admin']);
+Route::get('/health', fn() => response()->json(['status' => 'ok']));
 Route::get('/admin/users', [AdminUserController::class, 'index'])
     ->middleware(['web', 'auth:sanctum', 'role:super-admin']);
 Route::get('/admin/users/{user}', [AdminUserController::class, 'show'])
@@ -32,3 +30,9 @@ Route::get('/admin/roles', [AdminUserController::class, 'roles'])
     ->middleware(['web', 'auth:sanctum', 'role:super-admin']);
 Route::patch('/admin/users/{user}/roles', [AdminUserController::class, 'updateRoles'])
     ->middleware(['web', 'auth:sanctum', 'role:super-admin']);
+Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])
+    ->middleware(['web', 'auth:sanctum']);
+Route::get('/forums', [ForumController::class, 'index'])
+    ->middleware(['web', 'auth:sanctum']);  
+Route::post('/forums', [ForumController::class, 'store'])
+    ->middleware(['web', 'auth:sanctum']);

@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 
 class AdminUserController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index(): JsonResponse
     {
         $users = User::query()
             ->with('roles:id,name')
             ->get(['id', 'first_name', 'surname', 'email', 'created_at'])
-            ->map(fn (User $user): array => $this->adminUserData($user));
+            ->map(fn(User $user): array => $this->adminUserData($user));
 
         return response()->json($users);
     }
@@ -90,5 +93,25 @@ class AdminUserController extends Controller
             'roles' => $user->roles->pluck('name')->values(),
             'created_at' => $user->created_at,
         ];
+    }
+
+    public function destroy(User $user, Request $request): JsonResponse
+    {
+        $isSelf = $request->user()?->is($user);
+        if ($isSelf) {
+            throw ValidationException::withMessages([
+                'user' => ['You cannot delete your own account.'],
+            ]);
+        }
+        // authorization
+        $this->authorize('delete', $user);
+
+        // delete
+        $user->delete();
+
+        // response
+        return response()->json([
+            'message' => 'User deleted successfully.',
+        ]);
     }
 }

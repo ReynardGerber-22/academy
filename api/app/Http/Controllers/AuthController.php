@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -51,8 +53,11 @@ class AuthController extends Controller
             'first_name' => $validated['first_name'],
             'surname' => $validated['surname'],
             'email' => $validated['email'],
-            'password' => $validated['password'],
+            'password' => Hash::make($validated['password']),
         ]);
+
+        $studentRole = Role::where('name', 'student')->first();
+        $user->roles()->attach($studentRole);
 
         Auth::login($user);
 
