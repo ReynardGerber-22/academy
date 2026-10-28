@@ -10,9 +10,11 @@ class UserPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user): Response
     {
-        return false;
+        return $user->hasRole('administrator')
+            ? Response::allow()
+            : Response::deny('Forbidden.');
     }
 
     /**
@@ -20,7 +22,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return false;
+        return $user->hasRole('administrator');
     }
 
     /**
@@ -35,6 +37,14 @@ class UserPolicy
      * Determine whether the user can update the model.
      */
     public function update(User $user, User $model): bool
+    {
+        return $user->hasRole('administrator');
+    }
+
+    /**
+     * Determine whether the user can change another user's roles.
+     */
+    public function manageRoles(User $user, User $model): bool
     {
         return false;
     }

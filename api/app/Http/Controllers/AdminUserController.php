@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Role;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class AdminUserController extends Controller
 {
@@ -16,16 +16,19 @@ class AdminUserController extends Controller
 
     public function index(): JsonResponse
     {
+        $this->authorize('viewAny', User::class);
         $users = User::query()
             ->with('roles:id,name')
             ->get(['id', 'first_name', 'surname', 'email', 'created_at'])
-            ->map(fn(User $user): array => $this->adminUserData($user));
+            ->map(fn (User $user): array => $this->adminUserData($user));
 
         return response()->json($users);
     }
 
     public function roles(): JsonResponse
     {
+        $this->authorize('viewAny', User::class);
+
         return response()->json(
             Role::query()
                 ->orderBy('name')
@@ -35,6 +38,7 @@ class AdminUserController extends Controller
 
     public function show(User $user): JsonResponse
     {
+        $this->authorize('view', $user);
         $user->load('roles:id,name');
 
         return response()->json($this->adminUserData($user));
@@ -42,6 +46,7 @@ class AdminUserController extends Controller
 
     public function update(Request $request, User $user): JsonResponse
     {
+        $this->authorize('update', $user);
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
@@ -61,6 +66,7 @@ class AdminUserController extends Controller
 
     public function updateRoles(Request $request, User $user): JsonResponse
     {
+        $this->authorize('manageRoles', $user);
         $validated = $request->validate([
             'roles' => ['required', 'array', 'min:0'],
             'roles.*' => ['integer', 'distinct', 'exists:roles,id'],
@@ -103,13 +109,8 @@ class AdminUserController extends Controller
                 'user' => ['You cannot delete your own account.'],
             ]);
         }
-        // authorization
         $this->authorize('delete', $user);
-
-        // delete
         $user->delete();
-
-        // response
         return response()->json([
             'message' => 'User deleted successfully.',
         ]);

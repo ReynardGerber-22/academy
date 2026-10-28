@@ -21,7 +21,7 @@ class ForumPolicy
      */
     public function view(User $user, Forum $forum): bool
     {
-        return false;
+        return true;
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -304,6 +304,19 @@ class ApiTest extends TestCase
 
         $this->patchJson("/api/admin/users/{$user->id}/roles", [
             'roles' => [],
+        ])->assertForbidden();
+    }
+
+    public function test_administrator_cannot_update_roles(): void
+    {
+        $administrator = User::factory()->create();
+        $administrator->roles()->attach(Role::create(['name' => 'administrator']));
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($administrator);
+
+        $this->patchJson("/api/admin/users/{$user->id}/roles", [
+            'roles' => [Role::create(['name' => 'super-admin'])->id],
         ])->assertForbidden();
     }
 
